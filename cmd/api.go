@@ -21,9 +21,9 @@ var httpServerCmd = &cobra.Command{
 func server() {
 	logger := log.New(os.Stdout, "[api] ", log.Ltime)
 	r := mux.NewRouter()
-	r.HandleFunc("/valdassorys", controller.GithubUsernameHandler).Methods("GET")
+	r.HandleFunc("/username", controller.GithubUsernameHandler).Methods("GET")
 
-	// TODO. Add a handler here which will use controller.Sha256Handler function for HTTP "GET" method. Use curly brackets for path matching, like this: /{username}
+	r.HandleFunc("/valdassorys", controller.Sha256Handler).Methods("GET")
 
 	// serve static files - DO NOT CHANGE THIS!
 	r.PathPrefix("/ui/css").Handler(http.StripPrefix("/ui/css", http.FileServer(http.Dir("static/css"))))
